@@ -12,8 +12,8 @@ import com.example.demo.dao.GachaDao;
 import com.example.demo.entity.Clothes;
 import com.example.demo.exception.NoClothesFoundException;
 import com.example.demo.exception.NoMatchingCategoryException;
+import com.example.demo.model.Coordinate;
 import com.example.demo.model.GachaRequest;
-import com.example.demo.model.Outfit;
 
 @Service
 public class GachaService {
@@ -21,7 +21,7 @@ public class GachaService {
   @Autowired
   private GachaDao gachaDao;
 
-  public Outfit getCoordinateBySeason(GachaRequest request) {
+  public Coordinate getCoordinateBySeason(GachaRequest request) {
     // 選択した季節の服データを全て取得
     List<Clothes> clothes = gachaDao.selectAll(request.getSeason());
     
@@ -31,26 +31,26 @@ public class GachaService {
     }
     
     // 取得した服のデータからコーディネートを決定
-    Outfit outfit = new Outfit();
+    Coordinate coordinate = new Coordinate();
     
     if (Math.random() < 0.5) {
     	// 50%の確率でトップス、スカートを選択
-        outfit.setTop(selectItem(clothes, "トップス"));
-        outfit.setBottom(selectItem(clothes, "スカート,ズボン"));
+        coordinate.setTop(selectItem(clothes, "トップス"));
+        coordinate.setBottom(selectItem(clothes, "スカート,ズボン"));
     } else {
     	// 50%の確率でワンピースを選択
-        outfit.setBottom(selectItem(clothes, "ワンピース"));
+        coordinate.setBottom(selectItem(clothes, "ワンピース"));
     }
     
     // 100%の確率で靴を選択
-    outfit.setShoes(selectItem(clothes, "靴"));
+    coordinate.setShoes(selectItem(clothes, "靴"));
 
     // 50%の確率でメガネを選択
     if (Math.random() < 0.5) {
-        outfit.setGlasses(selectItem(clothes, "メガネ"));
+        coordinate.setGlasses(selectItem(clothes, "メガネ"));
     }
     // 決定したコーディネートをレスポンスする
-    return outfit;
+    return coordinate;
   }
   
   private Clothes selectItem(List<Clothes> items, String categories) {

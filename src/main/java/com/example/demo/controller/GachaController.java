@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.Coordinate;
 import com.example.demo.model.GachaRequest;
-import com.example.demo.model.Outfit;
 import com.example.demo.service.GachaService;
 
 
@@ -19,7 +19,7 @@ public class GachaController {
   GachaService gachaService;
   
   @GetMapping("/coordinate")
-  public Outfit getCoordinateBySeason(@RequestBody GachaRequest request) {
+  public Coordinate getCoordinateBySeason(@RequestBody GachaRequest request) {
     return gachaService.getCoordinateBySeason(request);
   }
 }
