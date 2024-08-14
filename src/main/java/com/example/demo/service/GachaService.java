@@ -24,7 +24,7 @@ public class GachaService {
   public Coordinate getCoordinateBySeason(GachaRequest request) {
     // 選択した季節の服データを全て取得
     List<Clothes> clothes = gachaDao.selectAll(request.getSeason());
-    
+	  
     // 季節に一致する服がない場合
     if (clothes.isEmpty()) {
     	throw new NoClothesFoundException(request.getSeason() + "の服が登録されていません。");

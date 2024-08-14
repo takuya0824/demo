@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ボタン風のラジオボタン</title>
+    <style>
+      /* ラジオボタンを非表示にする */
+      input[type="radio"] {
+        display: none;
+      }
+
+      /* ボタン風のラベル */
+      .radio-button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 5px;
+        border: 2px solid #007bff;
+        background-color: white;
+        color: #007bff;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.2s, color 0.2s;
+      }
+
+      /* ラジオボタンが選択されたときのスタイル */
+      input[type="radio"]:checked + .radio-button {
+        background-color: #007bff;
+        color: white;
+      }
+
+      /* ボタンをホバーしたときのスタイル */
+      .radio-button:hover {
+        background-color: #0056b3;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <input type="radio" id="option1" name="custom-radio" value="春" />
+      <label for="option1" class="radio-button">春</label>
+
+      <input type="radio" id="option2" name="custom-radio" value="夏" />
+      <label for="option2" class="radio-button">夏</label>
+
+      <input type="radio" id="option3" name="custom-radio" value="秋" />
+      <label for="option3" class="radio-button">秋</label>
+
+      <input type="radio" id="option4" name="custom-radio" value="冬" />
+      <label for="option4" class="radio-button">冬</label>
+    </form>
+    <button class="button" onclick="execApi()">ガチャを引く</button>
+    <div class="error-area"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
