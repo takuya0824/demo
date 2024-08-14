@@ -13,7 +13,6 @@ import com.example.demo.entity.Clothes;
 import com.example.demo.exception.NoClothesFoundException;
 import com.example.demo.exception.NoMatchingCategoryException;
 import com.example.demo.model.Coordinate;
-import com.example.demo.model.GachaRequest;
 
 @Service
 public class GachaService {
@@ -21,13 +20,13 @@ public class GachaService {
   @Autowired
   private GachaDao gachaDao;
 
-  public Coordinate getCoordinateBySeason(GachaRequest request) {
+  public Coordinate getCoordinateBySeason(String season) {
     // 選択した季節の服データを全て取得
-    List<Clothes> clothes = gachaDao.selectAll(request.getSeason());
+    List<Clothes> clothes = gachaDao.selectAll(season);
 	  
     // 季節に一致する服がない場合
     if (clothes.isEmpty()) {
-    	throw new NoClothesFoundException(request.getSeason() + "の服が登録されていません。");
+    	throw new NoClothesFoundException(season + "の服が登録されていません。");
     }
     
     // 取得した服のデータからコーディネートを決定

@@ -1,4 +1,3 @@
-
 // すべてのラジオボタンを取得
 const radios = document.querySelectorAll('input[name="custom-radio"]');
 // error-areaクラスを持つdiv要素を取得
@@ -10,17 +9,18 @@ let season = null;
 // 各ラジオボタンにイベントリスナーを追加
 radios.forEach(radio => {
     radio.addEventListener('change', function() {
-        console.log(this.value); // 選択されたラジオボタンのvalueをコンソールに表示
+        // 選択されたラジオボタンのvalueをコンソールに表示
+        console.log(this.value);
+        // APIに必要な季節のデータを格納
         season = this.value;
     });
 });
 
-function execApi() {
+function execGacha() {
   $.ajax({
-    type: 'POST',
+    type: 'GET',
     url: 'http://localhost:8080/gacha/coordinate',
-    data: JSON.stringify({ season: season }),
-    contentType: 'application/json',
+    data: { season: season },
     dataType: 'json'
   })
   //↓フォームの送信に成功した場合の処理
