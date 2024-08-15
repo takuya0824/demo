@@ -9,8 +9,6 @@ let season = null;
 // 各ラジオボタンにイベントリスナーを追加
 radios.forEach(radio => {
     radio.addEventListener('change', function() {
-        // 選択されたラジオボタンのvalueをコンソールに表示
-        console.log(this.value);
         // APIに必要な季節のデータを格納
         season = this.value;
     });
@@ -18,9 +16,10 @@ radios.forEach(radio => {
 
 function execGacha() {
   $.ajax({
-    type: 'GET',
+    type: 'POST',
     url: 'http://localhost:8080/gacha/coordinate',
-    data: { season: season },
+    data: JSON.stringify({ season: season }),
+    contentType: 'application/json',
     dataType: 'json'
   })
   //↓フォームの送信に成功した場合の処理
@@ -32,7 +31,6 @@ function execGacha() {
   })
   //↓フォームの送信に失敗した場合の処理
   .fail(function(e) {
-    console.log(e.responseJSON.message);
     if (errorArea.childNodes.length > 0) {
       errorArea.removeChild(pElement);
     }

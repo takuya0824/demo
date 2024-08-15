@@ -20,13 +20,13 @@ public class GachaService {
   @Autowired
   private GachaDao gachaDao;
 
-  public Coordinate getCoordinateBySeason(String season) {
+  public Coordinate getCoordinateBySeason(Clothes request) {
     // 選択した季節の服データを全て取得
-    List<Clothes> clothes = gachaDao.selectAll(season);
+    List<Clothes> clothes = gachaDao.selectAll(request.getSeason());
 	  
     // 季節に一致する服がない場合
     if (clothes.isEmpty()) {
-    	throw new NoClothesFoundException(season + "の服が登録されていません。");
+    	throw new NoClothesFoundException(request.getSeason() + "の服が登録されていません。");
     }
     
     // 取得した服のデータからコーディネートを決定
